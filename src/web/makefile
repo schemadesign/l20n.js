@@ -1,4 +1,4 @@
-DIST := $(CURDIR)/../../dist/$(shell basename $(CURDIR))
+DIST := $(CURDIR)/../../dist/web/
 
 build:
 	@mkdir -p "$(DIST)"
