@@ -14,7 +14,13 @@ import { documentReady, getResourceLinks, getMeta } from './util';
 // used to create new `MessageContext` objects for a given `lang` with selected
 // builtin functions.
 function createContext(lang) {
-  return new MessageContext(lang);
+  // IE11 & Edge renders FSI and PDI as mojibakes so we turn them off.
+  const isIE11 = window.navigator.userAgent.indexOf('Trident/') > -1;
+  const isEdge = window.navigator.userAgent.indexOf('Edge/') > -1;
+
+  return new MessageContext(lang, {
+    useIsolating: !isIE11 && !isEdge
+  });
 }
 
 // Called for every named Localization declared via <link name=…> elements.
